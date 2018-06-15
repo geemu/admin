@@ -1,0 +1,28 @@
+server:
+  port: 80
+
+spring:
+  # 数据库配置
+  datasource:
+    name: 主库
+    url: jdbc:mybatis://localhost:3306/springboot?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true
+    username: root
+    password: chen1436863821
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+
+# MyBatis配置
+mybatis:
+  config-location: classpath:/mybatis-config.xml
+  type-aliases-package: com.chenfangming.persistence.entity
+  mapper-locations: classpath:com.chenfangming.springboot/*.xml
+
+# 分页插件配置
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+
+
