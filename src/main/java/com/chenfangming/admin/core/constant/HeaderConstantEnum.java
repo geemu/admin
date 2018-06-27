@@ -1,4 +1,4 @@
-package com.chenfangming.manage.core.constant;
+package com.chenfangming.admin.core.constant;
 
 /**
  * @author fangming.chen

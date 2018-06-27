@@ -1,4 +1,4 @@
-package com.chenfangming.manage.controller;
+package com.chenfangming.admin.controller;
 
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.PostMapping;

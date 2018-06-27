@@ -1,4 +1,4 @@
-package com.chenfangming.manage.core.config;
+package com.chenfangming.admin.core.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +24,7 @@ public class SwaggerConfig {
     /**
      * 基础路径
      */
-    private static final String BASE_PACKAGE = "com.chenfangming.manage.controller";
+    private static final String BASE_PACKAGE = "com.chenfangming.admin.controller";
     /**
      * 标题
      */

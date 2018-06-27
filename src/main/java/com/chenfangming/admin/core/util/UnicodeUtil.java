@@ -1,4 +1,4 @@
-package com.chenfangming.manage.core.util;
+package com.chenfangming.admin.core.util;
 
 /**
  * @author fangming.chen

@@ -1,4 +1,4 @@
-package com.chenfangming.manage.persistence.entity;
+package com.chenfangming.admin.persistence.entity;
 
 import lombok.*;
 

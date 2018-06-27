@@ -1,11 +1,10 @@
-package com.chenfangming.manage.persistence.entity.view;
+package com.chenfangming.admin.persistence.entity.view;
 
-import com.chenfangming.manage.persistence.entity.Role;
-import com.chenfangming.manage.persistence.entity.User;
+import com.chenfangming.admin.persistence.entity.Role;
+import com.chenfangming.admin.persistence.entity.User;
 import lombok.*;
 
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * @author fangming.chen

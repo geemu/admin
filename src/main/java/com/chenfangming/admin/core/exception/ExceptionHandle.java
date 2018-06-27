@@ -1,4 +1,4 @@
-package com.chenfangming.manage.core.exception;
+package com.chenfangming.admin.core.exception;
 
 import com.chenfangming.core.constant.HeaderConstantEnum;
 import com.chenfangming.core.util.UnicodeUtil;

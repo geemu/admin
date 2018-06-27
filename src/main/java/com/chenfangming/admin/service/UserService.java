@@ -1,4 +1,4 @@
-package com.chenfangming.manage.service;
+package com.chenfangming.admin.service;
 
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.chenfangming.manage.persistence.entity;
+package com.chenfangming.admin.persistence.entity;
 
 import lombok.*;
 
@@ -7,32 +7,44 @@ import java.util.Objects;
 
 /**
  * @author fangming.chen
- * @since 2018-06-14 15：17
+ * @since 2018-06-14 14：54
  * Email cfmmail@sina.com
- * Description 角色
+ * Description 用户
  */
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
+public class User {
     /**
-     * 角色主键
+     * 用户主键
      */
     private Long id;
     /**
-     * 父节点
+     * 用户真实姓名
      */
-    private Long parentId;
+    private String realName;
     /**
-     * 角色名称
+     * 邮箱
      */
-    private String roleName;
+    private String email;
+    /**
+     * 密码
+     */
+    private String password;
+    /**
+     * 密码盐值
+     */
+    private String salt;
     /**
      * 备注
      */
     private int remark;
+    /**
+     * 账户状态 0正常 1禁用 2冻结
+     */
+    private int status;
     /**
      * 是否删除 0未删除 1删除
      */
@@ -54,6 +66,7 @@ public class Role {
      */
     private Long updaterId;
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -62,8 +75,8 @@ public class Role {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Role role = (Role) o;
-        return Objects.equals(id, role.id);
+        User user = (User) o;
+        return Objects.equals(id, user.id);
     }
 
     @Override

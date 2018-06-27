@@ -1,4 +1,4 @@
-package com.chenfangming.manage;
+package com.chenfangming.admin;
 
 
 import org.springframework.boot.SpringApplication;
