@@ -1,4 +1,4 @@
-package com.chenfangming.core.exception;
+package com.chenfangming.manage.core.exception;
 
 import lombok.Getter;
 import lombok.Setter;

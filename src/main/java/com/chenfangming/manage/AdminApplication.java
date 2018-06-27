@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Description 程序入口
  */
 @SpringBootApplication
-public class ManageApplication {
+public class AdminApplication {
 
     /**
      * 主函数
@@ -19,6 +19,6 @@ public class ManageApplication {
      * @param args 运行参数
      */
     public static void main(String[] args) {
-        SpringApplication.run(ManageApplication.class, args);
+        SpringApplication.run(AdminApplication.class, args);
     }
 }

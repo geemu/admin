@@ -1,4 +1,4 @@
-package com.chenfangming.core.exception;
+package com.chenfangming.manage.core.exception;
 
 import com.chenfangming.core.constant.HeaderConstantEnum;
 import com.chenfangming.core.util.UnicodeUtil;
@@ -26,7 +26,7 @@ public class ExceptionHandle {
      * @param response 返回
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(BusinessException.class)
+    @ExceptionHandler(IllegalArgumentException.class)
     public void handleIllegalArgumentException(IllegalArgumentException ie, HttpServletResponse response) {
         log.warn("请求参数异常:{}", ie);
         response.setIntHeader(HeaderConstantEnum.X_DIALOG_CODE.getHeader(), HttpStatus.BAD_REQUEST.value());

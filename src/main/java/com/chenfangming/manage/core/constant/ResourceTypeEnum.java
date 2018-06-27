@@ -1,8 +1,4 @@
-package com.chenfangming.core.constant;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
+package com.chenfangming.manage.core.constant;
 
 /**
  * @author fangming.chen
@@ -16,11 +12,11 @@ public enum ResourceTypeEnum {
      */
     MENU(0, "菜单"),
     /**
-     * 按钮
+     * 资源操作
      */
-    BUTTON(1, "是");
+    OPERATION(1, "按钮");
     /**
-     * 是否是菜单 不是菜单的是按钮
+     * 0 菜单 1 资源操作 增、删、改、查
      */
     private int resourceType;
     /**

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("user")
 @RestController
 public class UserController {
-
     /**
      * 登陆
      */
