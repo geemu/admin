@@ -1,8 +1,6 @@
 package com.chenfangming.admin.core.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * @author fangming.chen
@@ -13,6 +11,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class ErrorResponse {
     /**
      * 状态码
