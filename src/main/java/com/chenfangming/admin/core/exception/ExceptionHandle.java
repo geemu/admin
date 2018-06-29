@@ -1,7 +1,6 @@
 package com.chenfangming.admin.core.exception;
 
 import com.chenfangming.admin.core.constant.HeaderConstantEnum;
-import com.chenfangming.admin.core.model.ErrorResponse;
 import com.chenfangming.admin.core.util.UnicodeUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -30,12 +29,19 @@ public class ExceptionHandle {
     @ExceptionHandler(IllegalArgumentException.class)
     public ErrorResponse handleIllegalArgumentException(IllegalArgumentException ie, HttpServletResponse httpResponse) {
         log.warn("请求参数异常:{}", ie);
-        httpResponse.setIntHeader(HeaderConstantEnum.X_DIALOG_CODE.getHeader(), HttpStatus.BAD_REQUEST.value());
+        httpResponse.setIntHeader(HeaderConstantEnum.X_DIALOG_CODE.getHeader(), ErrorResponseEnum.ILLEGAL_ARGUMENT_ERROR.getCode());
         httpResponse.setHeader(HeaderConstantEnum.X_DIALOG_MESSAGE.getHeader(), UnicodeUtil.toUnicode(ie.getMessage()));
-        ErrorResponse response = new ErrorResponse();
-        response.setCode(HttpStatus.BAD_REQUEST.value());
-        response.setMessage(ie.getMessage());
-        return response;
+        return new ErrorResponse(new DialogException() {
+            @Override
+            public int getCode() {
+                return ErrorResponseEnum.ILLEGAL_ARGUMENT_ERROR.getCode();
+            }
+
+            @Override
+            public String getMessage() {
+                return ie.getMessage();
+            }
+        });
     }
 
     /**
@@ -49,10 +55,17 @@ public class ExceptionHandle {
         log.warn("自定义异常:{}", be);
         httpResponse.setIntHeader(HeaderConstantEnum.X_DIALOG_CODE.getHeader(), be.getCode());
         httpResponse.setHeader(HeaderConstantEnum.X_DIALOG_MESSAGE.getHeader(), UnicodeUtil.toUnicode(be.getMessage()));
-        ErrorResponse response = new ErrorResponse();
-        response.setCode(be.getCode());
-        response.setMessage(be.getMessage());
-        return response;
+        return new ErrorResponse(new DialogException() {
+            @Override
+            public int getCode() {
+                return be.getCode();
+            }
+
+            @Override
+            public String getMessage() {
+                return be.getMessage();
+            }
+        });
     }
 
     /**
@@ -63,12 +76,9 @@ public class ExceptionHandle {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     public ErrorResponse handleException(Exception e, HttpServletResponse httpResponse) {
-        log.error("服务器未知Exception异常:{}", e);
-        httpResponse.setIntHeader(HeaderConstantEnum.X_DIALOG_CODE.getHeader(), HttpStatus.INTERNAL_SERVER_ERROR.value());
-        httpResponse.setHeader(HeaderConstantEnum.X_DIALOG_MESSAGE.getHeader(), UnicodeUtil.toUnicode(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()));
-        ErrorResponse response = new ErrorResponse();
-        response.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
-        response.setMessage(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase());
-        return response;
+        log.error("后台服务器未知Exception异常:{}", e);
+        httpResponse.setIntHeader(HeaderConstantEnum.X_DIALOG_CODE.getHeader(), ErrorResponseEnum.INTERVAL_SERVER_ERROR.getCode());
+        httpResponse.setHeader(HeaderConstantEnum.X_DIALOG_MESSAGE.getHeader(), UnicodeUtil.toUnicode(ErrorResponseEnum.INTERVAL_SERVER_ERROR.getMessage()));
+        return new ErrorResponse(ErrorResponseEnum.INTERVAL_SERVER_ERROR);
     }
 }
