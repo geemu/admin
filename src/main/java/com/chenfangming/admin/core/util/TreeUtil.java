@@ -18,7 +18,7 @@ public class TreeUtil {
      * @param list 源集合
      * @return 树集合
      */
-    private static <T extends TreeNode> List<T> buildTree(List<T> list) {
+    public static <T extends TreeNode> List<T> buildTree(List<T> list) {
         List<T> tree = new ArrayList<>();
         for (T item : list) {
             // 找到根
