@@ -1,11 +1,11 @@
 package com.chenfangming.admin.core.util;
-
 /**
  * @author fangming.chen
  * @since 2018-06-13 12：33
  * Email cfmmail@sina.com
  * Description Unicode工具类
  */
+
 public class UnicodeUtil {
 
     /**
