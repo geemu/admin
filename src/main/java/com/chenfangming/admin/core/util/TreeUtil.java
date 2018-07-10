@@ -22,7 +22,7 @@ public class TreeUtil {
         List<T> tree = new ArrayList<>();
         for (T item : list) {
             // 找到根
-            if (0L == item.getParentId()) {
+            if (0 == item.getParentId()) {
                 tree.add(item);
             }
             // 找到子
@@ -44,7 +44,7 @@ public class TreeUtil {
         List<TreeNode> rootTreeNodeList = new ArrayList<>();
         // 找到根
         for (T tree : list) {
-            if (0L == tree.getParentId()) {
+            if (0 == tree.getParentId()) {
                 rootTreeNodeList.add(tree);
             }
         }

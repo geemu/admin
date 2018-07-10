@@ -1,34 +1,30 @@
 package com.chenfangming.admin.persistence.entity;
 
-import lombok.*;
+import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 
 /**
  * @author fangming.chen
  * @since 2018-06-14 14：54
  * Email cfmmail@sina.com
- * Description 用户
+ * Description 用户数据表
  */
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
-public class User {
+@Data
+public class User implements Serializable {
+    /**
+     * 序列化
+     */
+    private static final long serialVersionUID = 75671110182217138L;
     /**
      * 用户主键
      */
-    private Long id;
+    private Integer id;
     /**
-     * 用户真实姓名
+     * 用户名
      */
-    private String realName;
-    /**
-     * 邮箱
-     */
-    private String email;
+    private String userName;
     /**
      * 密码
      */
@@ -40,15 +36,15 @@ public class User {
     /**
      * 备注
      */
-    private int remark;
+    private String remark;
     /**
-     * 账户状态 0正常 1禁用 2冻结
+     * 状态  0：禁用   1：正常
      */
-    private int status;
+    private Boolean state;
     /**
-     * 是否删除 0未删除 1删除
+     * 是否删除  0：未删除   1：删除
      */
-    private Boolean isDeleted;
+    private Boolean isDelete;
     /**
      * 创建时间
      */
@@ -60,27 +56,9 @@ public class User {
     /**
      * 创建人id
      */
-    private Long createrId;
+    private Integer createUserId;
     /**
      * 更新人id
      */
-    private Long updaterId;
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        User user = (User) o;
-        return Objects.equals(id, user.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+    private Integer updateUserId;
 }

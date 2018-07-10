@@ -1,9 +1,8 @@
 package com.chenfangming.admin.core.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,18 +13,20 @@ import java.util.List;
  * Email cfmmail@sina.com
  * Description Tree 其他需要建树的类需要继承此类然后调用TreeUtil方法
  */
-@Getter
-@Setter
-@ToString
-public class TreeNode {
+@Data
+public class TreeNode implements Serializable {
+    /**
+     * 序列化
+     */
+    private static final long serialVersionUID = 7469670756390179911L;
     /**
      * 当前节点id
      */
-    private long id;
+    private int id;
     /**
-     * 当前节点的父节点
+     * 当前节点的父节点 0为根节点
      */
-    private long parentId;
+    private int parentId;
     /**
      * 子节点
      */
@@ -36,7 +37,7 @@ public class TreeNode {
      * @param id       节点
      * @param parentId 父节点
      */
-    public TreeNode(long id, long parentId) {
+    public TreeNode(int id, int parentId) {
         this.id = id;
         this.parentId = parentId;
     }

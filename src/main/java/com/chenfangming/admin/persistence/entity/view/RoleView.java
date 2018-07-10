@@ -1,5 +1,6 @@
 package com.chenfangming.admin.persistence.entity.view;
 
+import com.chenfangming.admin.persistence.entity.Menu;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -10,30 +11,22 @@ import java.util.Set;
  * @author fangming.chen
  * @since 2018-06-14 15：36
  * Email cfmmail@sina.com
- * Description 用户视图
+ * Description 角色视图
  */
 @Data
-public class UserView implements Serializable {
+public class RoleView implements Serializable {
     /**
      * 序列化
      */
-    private static final long serialVersionUID = 563338291761449909L;
+    private static final long serialVersionUID = -3110882640470081489L;
     /**
-     * 用户主键
+     * 角色主键
      */
     private Integer id;
     /**
-     * 用户名
+     * 角色名称唯一 用于页面显示
      */
-    private String userName;
-    /**
-     * 密码
-     */
-    private String password;
-    /**
-     * 密码盐值
-     */
-    private String salt;
+    private String roleName;
     /**
      * 备注
      */
@@ -63,8 +56,7 @@ public class UserView implements Serializable {
      */
     private Integer updateUserId;
     /**
-     * 角色列表,用于shiro做角色权限的判断
+     * 权限列表,用于shiro做资源权限的判断
      */
-    private Set<RoleView> roleSet;
-
+    private Set<Menu> menuSet;
 }

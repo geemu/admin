@@ -10,6 +10,10 @@ spring:
     password: chen1436863821
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.jdbc.Driver
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
+
 
 # MyBatis配置
 mybatis:

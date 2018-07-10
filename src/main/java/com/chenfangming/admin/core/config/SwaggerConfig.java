@@ -17,9 +17,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * Email cfmmail@sina.com
  * Description Swagger配置
  */
-@Configuration
-@EnableSwagger2
 @Slf4j
+@EnableSwagger2
+@Configuration
 public class SwaggerConfig {
     /**
      * 基础路径

@@ -8,6 +8,14 @@ package com.chenfangming.admin.core.constant;
  */
 public enum HeaderConstantEnum {
     /**
+     * 认证
+     */
+    AUTHORIZATION("Authorization"),
+    /**
+     * 源会话id
+     */
+    REFERENCED_SESSION_ID_SOURCE("Stateless request"),
+    /**
      * 状态码
      */
     X_DIALOG_CODE("X-Dialog-Code"),

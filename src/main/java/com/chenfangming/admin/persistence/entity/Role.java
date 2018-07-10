@@ -1,42 +1,42 @@
 package com.chenfangming.admin.persistence.entity;
 
-import lombok.*;
+import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 
 /**
  * @author fangming.chen
  * @since 2018-06-14 15：17
  * Email cfmmail@sina.com
- * Description 角色
+ * Description 角色数据表
  */
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
-public class Role {
+@Data
+public class Role implements Serializable {
+    /**
+     * 序列化
+     */
+    private static final long serialVersionUID = 2543595593318533458L;
     /**
      * 角色主键
      */
-    private Long id;
+    private Integer id;
     /**
-     * 父节点
-     */
-    private Long parentId;
-    /**
-     * 角色名称
+     * 角色名称唯一 用于页面显示
      */
     private String roleName;
     /**
      * 备注
      */
-    private int remark;
+    private String remark;
     /**
-     * 是否删除 0未删除 1删除
+     * 状态  0：禁用   1：正常
      */
-    private Boolean isDeleted;
+    private Boolean state;
+    /**
+     * 是否删除  0：未删除   1：删除
+     */
+    private Boolean isDelete;
     /**
      * 创建时间
      */
@@ -48,26 +48,9 @@ public class Role {
     /**
      * 创建人id
      */
-    private Long createrId;
+    private Integer createUserId;
     /**
      * 更新人id
      */
-    private Long updaterId;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Role role = (Role) o;
-        return Objects.equals(id, role.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+    private Integer updateUserId;
 }

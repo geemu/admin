@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chenfangming.admin.persistence.mapper.MenuMapper">
+    <resultMap id="BaseResultMap" type="com.chenfangming.admin.persistence.entity.Menu">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="permission" property="permission"/>
+        <result column="uri" property="uri"/>
+        <result column="type" property="type"/>
+        <result column="name" property="name"/>
+        <result column="icon" property="icon"/>
+        <result column="sort" property="sort"/>
+        <result column="remark" property="remark"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_user_id" property="createUserId"/>
+        <result column="update_user_id" property="updateUserId"/>
+    </resultMap>
+
+    <!-- 查找所有权限 -->
+    <select id="selectAllMenu" resultMap="BaseResultMap">
+    SELECT *
+    FROM admin_sys_menu
+    ORDER BY sort DESC
+    </select>
+    <!-- 根据用户id获取用户所拥有的全部权限 -->
+    <select id="selectUserPermissionSetByUserId" resultType="java.lang.String">
+    SELECT
+      m.permission
+    FROM
+      admin_sys_user_role ur
+      LEFT JOIN admin_sys_role_menu rm
+        ON ur.role_id = rm.role_id
+      LEFT JOIN admin_sys_menu m
+        ON rm.menu_id = m.id
+    WHERE ur.user_id = #{userId}
+      AND ur.is_delete = 0
+      AND rm.is_delete = 0
+      AND m.is_delete = 0
+      AND m.state = 1
+    </select>
+</mapper>
