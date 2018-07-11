@@ -3,10 +3,12 @@ package com.chenfangming.admin.core.config.shiro;
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,9 +30,35 @@ public class ShiroConfig {
      * ShiroDialect，为了在thymeleaf里使用shiro的标签的bean
      * @return ShiroDialect
      */
-    @Bean
+    @Bean("shiroDialect")
     public ShiroDialect shiroDialect() {
         return new ShiroDialect();
+    }
+
+    /**
+     * session管理器
+     * @return SessionManager
+     */
+    @Bean(name = "sessionManager")
+    public SessionManager sessionManager() {
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        //设置session过期时间为1小时(单位：毫秒)，默认为30分钟
+        sessionManager.setGlobalSessionTimeout(60 * 60 * 1000);
+        sessionManager.setSessionValidationSchedulerEnabled(true);
+        sessionManager.setSessionIdUrlRewritingEnabled(false);
+        return sessionManager;
+    }
+
+    /**
+     * 安全管理器
+     * @return SecurityManager
+     */
+    @Bean("securityManager")
+    public SecurityManager securityManager(ShiroUserRealm shiroUserRealm, SessionManager sessionManager) {
+        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        securityManager.setRealm(shiroUserRealm);
+        securityManager.setSessionManager(sessionManager);
+        return securityManager;
     }
 
     /**
@@ -57,48 +85,6 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
-
-
-    /**
-     * 自定义Realm
-     * @return ShiroUserRealm
-     */
-    @Bean("shiroUserRealm")
-    public ShiroUserRealm shiroUserRealm() {
-        ShiroUserRealm shiroUserRealm = new ShiroUserRealm();
-        shiroUserRealm.setCredentialsMatcher(hashedCredentialsMatcher());
-        return shiroUserRealm;
-    }
-
-    /**
-     * 安全管理器
-     * @return SecurityManager
-     */
-    @Bean("securityManager")
-    public SecurityManager securityManager() {
-        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(shiroUserRealm());
-        return securityManager;
-    }
-
-    /**
-     * 凭证匹配器 我们的密码校验交给shiro的SimpleAuthenticationInfo进行处理了
-     * 所以我们需要修改下doGetAuthenticationInfo中的代码
-     * 可以扩展凭证匹配器，实现 输入密码错误次数后锁定等功能
-     * @return HashedCredentialsMatcher
-     */
-    @Bean("hashedCredentialsMatcher")
-    public HashedCredentialsMatcher hashedCredentialsMatcher() {
-        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        // 散列算法:这里使用MD5算法;
-        hashedCredentialsMatcher.setHashAlgorithmName("md5");
-        // 散列的次数，比如散列两次，相当于 md5(md5(""));
-        hashedCredentialsMatcher.setHashIterations(2);
-        // storedCredentialsHexEncoded默认是true，此时用的是密码加密用的是Hex编码；false时用Base64编码
-        hashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);
-        return hashedCredentialsMatcher;
-    }
-
 
     /**
      * Shiro生命周期处理器
@@ -127,10 +113,41 @@ public class ShiroConfig {
      * @return AuthorizationAttributeSourceAdvisor
      */
     @Bean
-    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor() {
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
-        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager());
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
+    }
+
+
+//    /**
+//     * 自定义Realm
+//     * @return ShiroUserRealm
+//     */
+//    @Bean("shiroUserRealm")
+//    public ShiroUserRealm shiroUserRealm() {
+//        ShiroUserRealm shiroUserRealm = new ShiroUserRealm();
+//        shiroUserRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+//        return shiroUserRealm;
+//    }
+
+
+    /**
+     * 凭证匹配器 我们的密码校验交给shiro的SimpleAuthenticationInfo进行处理了
+     * 所以我们需要修改下doGetAuthenticationInfo中的代码
+     * 可以扩展凭证匹配器，实现 输入密码错误次数后锁定等功能
+     * @return HashedCredentialsMatcher
+     */
+    @Bean("hashedCredentialsMatcher")
+    public HashedCredentialsMatcher hashedCredentialsMatcher() {
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        // 散列算法:这里使用MD5算法;
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");
+        // 散列的次数，比如散列两次，相当于 md5(md5(""));
+        hashedCredentialsMatcher.setHashIterations(2);
+        // storedCredentialsHexEncoded默认是true，此时用的是密码加密用的是Hex编码；false时用Base64编码
+        hashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);
+        return hashedCredentialsMatcher;
     }
 
 

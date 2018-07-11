@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Email cfmmail@sina.com
  * Description 程序入口
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages={"com.chenfangming.admin","org.apache.shiro"})
 @MapperScan(basePackages = "com.chenfangming.admin.persistence.mapper")
 public class AdminApplication {
 
