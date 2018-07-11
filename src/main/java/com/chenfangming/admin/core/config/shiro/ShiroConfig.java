@@ -40,7 +40,7 @@ public class ShiroConfig {
      * @param securityManager 安全管理器
      * @return shiro过滤器bean工厂
      */
-    @Bean("shirFilter")
+    @Bean("shiroFilter")
     public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);

@@ -22,12 +22,12 @@ public class TreeUtil {
         List<T> tree = new ArrayList<>();
         for (T item : list) {
             // 找到根
-            if (0 == item.getParentId()) {
+            if (null == item.getParentId()) {
                 tree.add(item);
             }
             // 找到子
             for (T treeNode : list) {
-                if (treeNode.getParentId() == item.getId()) {
+                if (treeNode.getParentId().equals(item.getId())) {
                     item.getChildren().add(treeNode);
                 }
             }
@@ -62,7 +62,7 @@ public class TreeUtil {
      */
     private static <T extends TreeNode> void getChildren(List<T> rootTreeNodeList, TreeNode tree) {
         for (T node : rootTreeNodeList) {
-            if (tree.getParentId() == node.getId()) {
+            if (tree.getParentId().equals(node.getId())) {
                 if (null == node.getChildren()) {
                     node.setChildren(new ArrayList<>());
                 }

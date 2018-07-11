@@ -17,7 +17,7 @@ spring:
 
 # MyBatis配置
 mybatis:
-  #config-location: classpath:/mybatis-config.xml
+  config-location: classpath:/mybatis-config.xml
   type-aliases-package: com.chenfangming.persistence.entity
   mapper-locations: classpath:com.chenfangming.admin.persistence.mapper.impl/*.xml
 

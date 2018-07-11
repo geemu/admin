@@ -22,11 +22,11 @@ public class TreeNode implements Serializable {
     /**
      * 当前节点id
      */
-    private int id;
+    private Integer id;
     /**
      * 当前节点的父节点 0为根节点
      */
-    private int parentId;
+    private Integer parentId;
     /**
      * 子节点
      */

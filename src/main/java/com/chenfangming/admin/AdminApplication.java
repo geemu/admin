@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Description 程序入口
  */
 @SpringBootApplication
-@MapperScan(basePackages = "com.chenfangming.persistence")
+@MapperScan(basePackages = "com.chenfangming.admin.persistence.mapper")
 public class AdminApplication {
 
     /**
