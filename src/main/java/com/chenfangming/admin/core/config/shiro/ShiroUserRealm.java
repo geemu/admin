@@ -69,7 +69,7 @@ public class ShiroUserRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         User user = (User) principals.getPrimaryPrincipal();
-        Integer userId = user.getId();
+        Integer userId = user.getUserId();
         // 用户权限列表
         Set<String> permissionSet = menuService.getUserPermissionSetByUserId(userId);
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();

@@ -39,12 +39,12 @@ public class MenuService {
      * @return 资源权限集合
      */
     public Set<String> getUserPermissionSetByUserId(Integer userId) {
-        Set<String> permissionSet = menuMapper.selectUserPermissionSetByUserId(userId);
+        List<Menu> permissionList = menuMapper.selectUserPermissionListByUserId(userId);
         // 用户权限列表
         Set<String> response = new HashSet<>();
-        for (String perms : permissionSet) {
-            if (StringUtils.isNotBlank(perms)) {
-                response.addAll(Arrays.asList(perms.trim().split(",")));
+        for (Menu item : permissionList) {
+            if (StringUtils.isNotBlank(item.getUri())) {
+                response.addAll(Arrays.asList(item.getPermission().trim().split(",")));
             }
         }
         return response;

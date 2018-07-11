@@ -20,7 +20,11 @@ public class Role implements Serializable {
     /**
      * 角色主键
      */
-    private Integer id;
+    private Integer roleId;
+    /**
+     * 角色编号 唯一 便于角色批量导入
+     */
+    private String roleCode;
     /**
      * 角色名称唯一 用于页面显示
      */

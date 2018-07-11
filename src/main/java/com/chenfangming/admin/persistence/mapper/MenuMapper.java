@@ -3,7 +3,6 @@ package com.chenfangming.admin.persistence.mapper;
 import com.chenfangming.admin.persistence.entity.Menu;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author fangming.chen
@@ -24,5 +23,5 @@ public interface MenuMapper {
      * @param userId 用户id
      * @return 资源权限集合
      */
-    Set<String> selectUserPermissionSetByUserId(Integer userId);
+    List<Menu> selectUserPermissionListByUserId(Integer userId);
 }

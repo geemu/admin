@@ -20,7 +20,7 @@ public class User implements Serializable {
     /**
      * 用户主键
      */
-    private Integer id;
+    private Integer userId;
     /**
      * 用户名
      */

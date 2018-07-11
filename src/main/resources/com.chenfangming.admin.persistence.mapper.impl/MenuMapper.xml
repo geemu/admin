@@ -2,12 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.chenfangming.admin.persistence.mapper.MenuMapper">
     <resultMap id="BaseResultMap" type="com.chenfangming.admin.persistence.entity.Menu">
-        <id column="id" property="id"/>
+        <id column="menu_id" property="menuId"/>
+        <result column="menu_code" property="menuCode"/>
         <result column="parent_id" property="parentId"/>
+        <result column="name" property="name"/>
         <result column="permission" property="permission"/>
+        <result column="method" property="method"/>
         <result column="uri" property="uri"/>
         <result column="type" property="type"/>
-        <result column="name" property="name"/>
         <result column="icon" property="icon"/>
         <result column="sort" property="sort"/>
         <result column="remark" property="remark"/>
@@ -17,26 +19,41 @@
         <result column="update_user_id" property="updateUserId"/>
     </resultMap>
 
+    <sql id="BaseColumn">
+        admin_sys_menu.menu_id,
+        admin_sys_menu.menu_code,
+        admin_sys_menu.parent_id,
+        admin_sys_menu.`name`,
+        admin_sys_menu.permission,
+        admin_sys_menu.method,
+        admin_sys_menu.uri,
+        admin_sys_menu.`type`,
+        admin_sys_menu.icon,
+        admin_sys_menu.sort,
+        admin_sys_menu.remark,
+        admin_sys_menu.create_time,
+        admin_sys_menu.update_time,
+        admin_sys_menu.create_user_id,
+        admin_sys_menu.update_user_id
+    </sql>
+
     <!-- 查找所有权限 -->
     <select id="selectAllMenu" resultMap="BaseResultMap">
-    SELECT *
-    FROM admin_sys_menu
-    ORDER BY sort DESC
+        SELECT
+        <include refid="BaseColumn"/>
+        FROM admin_sys_menu
+        ORDER BY sort DESC
     </select>
     <!-- 根据用户id获取用户所拥有的全部权限 -->
-    <select id="selectUserPermissionSetByUserId" resultType="java.lang.String">
-    SELECT
-      m.permission
-    FROM
-      admin_sys_user_role ur
-      LEFT JOIN admin_sys_role_menu rm
-        ON ur.role_id = rm.role_id
-      LEFT JOIN admin_sys_menu m
-        ON rm.menu_id = m.id
-    WHERE ur.user_id = #{userId}
-      AND ur.is_delete = 0
-      AND rm.is_delete = 0
-      AND m.is_delete = 0
-      AND m.state = 1
+    <select id="selectUserPermissionListByUserId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BaseColumn"/>
+        FROM
+        admin_sys_user_role ur
+        LEFT JOIN admin_sys_role_menu rm
+        ON ur.role_id= rm.role_id
+        LEFT JOIN admin_sys_menu m
+        ON rm.menu_id= m.menu_id
+        WHERE ur.user_id = #{userId}
     </select>
 </mapper>
