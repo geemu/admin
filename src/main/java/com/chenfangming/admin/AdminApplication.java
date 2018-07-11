@@ -1,6 +1,7 @@
 package com.chenfangming.admin;
 
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Description 程序入口
  */
 @SpringBootApplication
+@MapperScan(basePackages = "com.chenfangming.persistence")
 public class AdminApplication {
 
     /**
