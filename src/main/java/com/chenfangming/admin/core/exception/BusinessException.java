@@ -14,22 +14,19 @@ import lombok.ToString;
 @Setter
 @ToString
 public class BusinessException extends RuntimeException {
+    private static final long serialVersionUID = 6654413130112451556L;
     /**
-     * 状态码
+     * 异常
      */
-    private int code;
-    /**
-     * 提示信息
-     */
-    private String message;
+    private DialogException dialogException;
 
     /**
      * 构造
      * @param dialogException 异常
      */
     public BusinessException(DialogException dialogException) {
-        this.code = dialogException.getCode();
-        this.message = dialogException.getMessage();
+        super();
+        this.dialogException = dialogException;
     }
 
 }

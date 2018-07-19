@@ -17,13 +17,13 @@ public class IllegalArgumentException extends RuntimeException {
     /**
      * 提示信息
      */
-    private String message;
+    private String description;
 
     /**
      * 构造
-     * @param message 异常信息
+     * @param description 异常信息
      */
-    public IllegalArgumentException(String message) {
-        this.message = message;
+    public IllegalArgumentException(String description) {
+        this.description = description;
     }
 }

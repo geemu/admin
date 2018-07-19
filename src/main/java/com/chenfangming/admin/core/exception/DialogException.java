@@ -17,5 +17,5 @@ public interface DialogException {
      * 获取提示信息
      * @return 提示信息
      */
-    String getMessage();
+    String getDescription();
 }

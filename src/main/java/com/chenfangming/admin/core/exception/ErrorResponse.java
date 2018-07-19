@@ -15,20 +15,15 @@ import lombok.ToString;
 @ToString
 public class ErrorResponse {
     /**
-     * 状态码
+     * 异常
      */
-    private int code;
-    /**
-     * 提示信息
-     */
-    private String message;
+    private DialogException dialogException;
 
     /**
      * 构造
      * @param dialogException 异常信息
      */
     public ErrorResponse(DialogException dialogException) {
-        this.code = dialogException.getCode();
-        this.message = dialogException.getMessage();
+        this.dialogException = dialogException;
     }
 }

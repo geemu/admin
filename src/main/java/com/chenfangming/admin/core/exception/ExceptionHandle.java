@@ -22,7 +22,7 @@ public class ExceptionHandle {
 
     /**
      * 处理请求参数异常 http状态码400
-     * @param ie           异常
+     * @param ie 异常
      * @param httpResponse 返回
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -38,39 +38,39 @@ public class ExceptionHandle {
             }
 
             @Override
-            public String getMessage() {
-                return ie.getMessage();
+            public String getDescription() {
+                return ie.getDescription();
             }
         });
     }
 
     /**
      * 自定义异常处理 http状态码406 请求的资源的内容特性无法满足请求头中的条件，因而无法生成响应实体
-     * @param be           异常
+     * @param be 异常
      * @param httpResponse 返回
      */
     @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
     @ExceptionHandler(BusinessException.class)
     public ErrorResponse handleBusinessException(BusinessException be, HttpServletResponse httpResponse) {
         log.warn("自定义异常:{}", be);
-        httpResponse.setIntHeader(HeaderConstantEnum.X_DIALOG_CODE.getHeader(), be.getCode());
-        httpResponse.setHeader(HeaderConstantEnum.X_DIALOG_MESSAGE.getHeader(), UnicodeUtil.toUnicode(be.getMessage()));
+        httpResponse.setIntHeader(HeaderConstantEnum.X_DIALOG_CODE.getHeader(), be.getDialogException().getCode());
+        httpResponse.setHeader(HeaderConstantEnum.X_DIALOG_MESSAGE.getHeader(), UnicodeUtil.toUnicode(be.getDialogException().getDescription()));
         return new ErrorResponse(new DialogException() {
             @Override
             public int getCode() {
-                return be.getCode();
+                return be.getDialogException().getCode();
             }
 
             @Override
-            public String getMessage() {
-                return be.getMessage();
+            public String getDescription() {
+                return be.getDialogException().getDescription();
             }
         });
     }
 
     /**
      * 服务器未知异常处理 http状态码500
-     * @param e            异常
+     * @param e 异常
      * @param httpResponse 返回
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -78,7 +78,7 @@ public class ExceptionHandle {
     public ErrorResponse handleException(Exception e, HttpServletResponse httpResponse) {
         log.error("后台服务器未知Exception异常:{}", e);
         httpResponse.setIntHeader(HeaderConstantEnum.X_DIALOG_CODE.getHeader(), ErrorResponseEnum.INTERVAL_SERVER_ERROR.getCode());
-        httpResponse.setHeader(HeaderConstantEnum.X_DIALOG_MESSAGE.getHeader(), UnicodeUtil.toUnicode(ErrorResponseEnum.INTERVAL_SERVER_ERROR.getMessage()));
+        httpResponse.setHeader(HeaderConstantEnum.X_DIALOG_MESSAGE.getHeader(), UnicodeUtil.toUnicode(ErrorResponseEnum.INTERVAL_SERVER_ERROR.getDescription()));
         return new ErrorResponse(ErrorResponseEnum.INTERVAL_SERVER_ERROR);
     }
 }

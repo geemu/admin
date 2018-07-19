@@ -26,26 +26,25 @@ public enum ErrorResponseEnum implements DialogException {
     /**
      * 账号已被锁定,请联系管理员
      */
-    ACCOUNT_LOCKED_ERROR(-5,"账号已被锁定,请联系管理员");
-
+    ACCOUNT_LOCKED_ERROR(-5, "账号已被锁定,请联系管理员");
 
     /**
      * 状态码
      */
     private int code;
     /**
-     * 提示信息
+     * 提示描述信息
      */
-    private String message;
+    private String description;
 
     /**
      * 构造
-     * @param code    状态码
-     * @param message 提示信息
+     * @param code 状态码
+     * @param description 提示信息
      */
-    ErrorResponseEnum(int code, String message) {
+    ErrorResponseEnum(int code, String description) {
         this.code = code;
-        this.message = message;
+        this.description = description;
     }
 
     /**
@@ -62,7 +61,7 @@ public enum ErrorResponseEnum implements DialogException {
      * @return 提示信息
      */
     @Override
-    public String getMessage() {
-        return this.message;
+    public String getDescription() {
+        return this.description;
     }
 }
