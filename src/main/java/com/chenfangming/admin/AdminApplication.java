@@ -1,6 +1,5 @@
 package com.chenfangming.admin;
 
-
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
@@ -12,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Email cfmmail@sina.com
  * Description 程序入口
  */
-@SpringBootApplication(scanBasePackages={"com.chenfangming.admin","org.apache.shiro"})
+@SpringBootApplication(scanBasePackages = {"com.chenfangming.admin", "org.apache.shiro"})
 @MapperScan(basePackages = "com.chenfangming.admin.persistence.mapper")
 public class AdminApplication {
 
