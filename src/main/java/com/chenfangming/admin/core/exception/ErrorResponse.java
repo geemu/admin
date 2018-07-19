@@ -1,7 +1,8 @@
 package com.chenfangming.admin.core.exception;
 
-import com.chenfangming.admin.core.exception.DialogException;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author fangming.chen
