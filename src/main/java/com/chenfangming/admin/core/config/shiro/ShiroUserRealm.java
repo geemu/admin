@@ -48,15 +48,15 @@ public class ShiroUserRealm extends AuthorizingRealm {
         User user = userService.getUserByUserName(userName);
         // 账号不存在
         if (null == user) {
-            throw new UnknownAccountException(ErrorResponseEnum.ACCOUNT_NOT_FOUND_ERROR.getMessage());
+            throw new UnknownAccountException(ErrorResponseEnum.ACCOUNT_NOT_FOUND_ERROR.getDescription());
         }
         // 密码错误
         if (!password.equals(user.getPassword())) {
-            throw new IncorrectCredentialsException(ErrorResponseEnum.PASSWORD_NOT_INCORRECT.getMessage());
+            throw new IncorrectCredentialsException(ErrorResponseEnum.PASSWORD_NOT_INCORRECT.getDescription());
         }
         // 账号锁定
         if (!user.getState()) {
-            throw new LockedAccountException(ErrorResponseEnum.ACCOUNT_LOCKED_ERROR.getMessage());
+            throw new LockedAccountException(ErrorResponseEnum.ACCOUNT_LOCKED_ERROR.getDescription());
         }
         return new SimpleAuthenticationInfo(user.getUserName(), user.getPassword(), getName());
     }
@@ -76,6 +76,5 @@ public class ShiroUserRealm extends AuthorizingRealm {
         simpleAuthorizationInfo.setStringPermissions(permissionSet);
         return simpleAuthorizationInfo;
     }
-
 
 }
